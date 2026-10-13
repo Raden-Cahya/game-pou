@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #1b2a41; /* terlihat hanya di layar lebar (desktop) */
+  touch-action: none;
+  overscroll-behavior: none;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Area game: penuh di HP, dibatasi rasio di layar lebar */
+#game {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  width: min(100vw, 62vh);
+  width: min(100vw, 62dvh);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* Score pojok kiri atas */
+#hud {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  left: 14px;
+  padding: 6px 14px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 999px;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* Overlay (start & game over) */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  color: #fff;
+  background: rgba(20, 40, 80, 0.55);
+  pointer-events: none;
+  animation: pop 0.35s ease-out;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay h1 {
+  font-size: clamp(36px, 11vw, 56px);
+  font-weight: 900;
+  color: #ffe36e;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.overlay .hint {
+  font-size: 18px;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.overlay .final {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.overlay .best {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.overlay .tap {
+  margin-top: 14px;
+  padding: 10px 22px;
+  font-size: 20px;
+  font-weight: 800;
+  background: #ff7eb6;
+  border-radius: 999px;
+  box-shadow: 0 5px 0 #d4558a;
+  animation: pulse 1.1s ease-in-out infinite;
+}
+
+#lose-img {
+  max-width: 55%;
+  max-height: 32vh;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.07); }
+}
